@@ -8,6 +8,7 @@ package Data
 	public class Queue 
 	{
 		private var elements:Array = [];
+		private var length:int = 0;
 		
 		function Queue():void
 		{

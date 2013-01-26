@@ -8,7 +8,9 @@ package Data
 	 */
 	public class Node
 	{
+		public var id:int;
 		private var content:Content;
+		private var title:String;
 		private var predecessor:Node;
 		private var successors:Vector.<Node> = new Vector.<Node>();
 		
@@ -50,6 +52,17 @@ package Data
 		protected function Play(content:Content):void
 		{
 			content.play();
+		}
+		
+		public function setTitle(title:String):void
+		{
+			this.title = title;
+		}
+		
+		public function toString():String
+		{
+			//TODO: print the content after finishing content classes 
+			return id + title + " ";// + content.toString() + " ";
 		}
 	}
 }

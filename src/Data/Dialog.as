@@ -3,7 +3,7 @@ package Data
 	
 	/**
 	 * ...
-	 * @author ...
+	 * @author Franck Labat
 	 */
 	public class Dialog implements Content 
 	{
@@ -17,6 +17,11 @@ package Data
 		public function play():void
 		{
 			// Do the stuff
+		}
+		
+		public function toString():String
+		{
+			return value;
 		}
 	}
 	

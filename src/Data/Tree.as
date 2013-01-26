@@ -7,7 +7,7 @@ package Data
 	 */
 	public class Tree
 	{
-		private var parent:Node = new Node();
+		private var start:Node = new Node();
 		private var current:Node;
 		private var loader:Loader;
 		
@@ -15,7 +15,10 @@ package Data
 		public function Tree(loader:Loader):void
 		{
 			this.loader = loader;
-			parent = current = loader.parent();
+			start = current = loader.parent();
+			var printer:Printer = new Printer();
+			//BFS(start, printer);
+			DFS(start, printer);
 		}
 		
 		/**

@@ -13,24 +13,31 @@ package Data
 		{
 			nodes = new Vector.<Node>(xml.elements().length());
 			var nodeXML:XML;
-			// Load content
+			var id:int;
+			// Load title and content
 			for each(nodeXML in xml.elements())
 			{
-				var id:int = nodeXML.attribute("id");
+				id = nodeXML.attribute("id");
 				nodes[id] = new Node();
+				var title:String = nodeXML.title.children()[0].toString();
 				var content:Content = ContentFactory.build(nodeXML.content.attribute("type"),
 												           nodeXML.content.children()[0].toString());
 				nodes[id].setContent(content);
+				nodes[id].setTitle(title);
+				nodes[id].id = id;
 			}
 			
 			// Load transitions
 			for each(nodeXML in xml.elements())
 			{
-				var current:int = nodeXML.attribute("id");
-				var predecessor:int = nodeXML.content.attribute("predecessor");
-				
-				nodes[current].addPredecessor(nodes[predecessor])
-				nodes[predecessor].addSuccessor(nodes[current]);
+				id = nodeXML.attribute("id");
+				// id = 0 is the parent and doesn't have a parent
+				if (id != 0)
+				{
+					var parent:int = nodeXML.attribute("parent");
+					nodes[id].addPredecessor(nodes[parent])
+					nodes[parent].addSuccessor(nodes[id]);
+				}
 			}
 		}
 		

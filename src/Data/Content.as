@@ -3,10 +3,11 @@ package Data
 	
 	/**
 	 * Generic loader of tree
-	 * @author ...
+	 * @author Franck Labat
 	 */
 	public interface Content 
 	{
 		function play():void;
+		function toString():String;
 	}	
 }

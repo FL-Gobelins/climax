@@ -1,4 +1,4 @@
-package 
+package Data
 {
 	import flash.text.engine.ContentElement;
 	

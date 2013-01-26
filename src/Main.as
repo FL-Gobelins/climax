@@ -5,6 +5,7 @@ package
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import Gameplay.BubbleSprite;
+	import Data.*;
 	
 	/**
 	 * ...

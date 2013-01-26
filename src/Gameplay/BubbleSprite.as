@@ -94,7 +94,7 @@ package Gameplay
 				//If this is the currentBubble, add a specific callback about size
 				if (bubbles[j] == currentBubble) 
 				{
-					// TweenMax.to(bubbles[j], 0.6, { x:bubbles[j].x + translateVector.x, y:bubbles[j].y + translateVector.y, scaleX:2, scaleY:2, onComplete:displayBubbleContent, onCompleteParams:[bubble] } );
+					 TweenMax.to(bubbles[j], 0.6, { x:bubbles[j].x + translateVector.x, y:bubbles[j].y + translateVector.y, scaleX:2, scaleY:2, onComplete:displayBubbleContent, onCompleteParams:[bubble] } );
 				} else {
 					TweenMax.to(bubbles[j], 0.6, { x:bubbles[j].x + translateVector.x, y:bubbles[j].y + translateVector.y } );
 				}

@@ -28,6 +28,7 @@ package Gameplay
 			localScenario = scenario;
 			
 			var bubble:Bubble = new Bubble(scenario.getCurrent());
+			scenario.getCurrent().bubble = bubble;
 			bubble.x = 400;
 			bubble.y = 300;
 			currentBubble = bubble;
@@ -53,23 +54,29 @@ package Gameplay
 			//we place a new bubble at each spacer
 			for (var l:int = 0; l < amount; l++) 
 			{
-				//Create a bubble
-				var newBubble:Bubble = new Bubble(localScenario.getCurrent().getSuccessors()[l]);
-				//TODO : add a node to the bubble
-				//place the bubble
-				newBubble.x = bubble.x - (Global.WIDTH / 2) + ((l+1) * spacer);
-				newBubble.y = bubble.y - 220;
-				//Add it to the bubble vector
-				bubbles.push(newBubble);
-				//Add children
-				addChild(newBubble);
+				var localNode:Node = localScenario.getCurrent().getSuccessors()[l];
 				
-				//create a line
-				var line:BubbleLink = new BubbleLink(currentBubble.x, currentBubble.y, newBubble.x, newBubble.y);
-				line.x = currentBubble.x;
-				line.y = currentBubble.y;
-				newBubble.oncomingLine = line;
-				addChildAt(line, 0);
+				if (!localNode.visited) 
+				{
+					//Create a bubble
+					var newBubble:Bubble = new Bubble(localNode);
+					localNode.bubble = newBubble;
+					//TODO : add a node to the bubble
+					//place the bubble
+					newBubble.x = bubble.x - (Global.WIDTH / 2) + ((l+1) * spacer);
+					newBubble.y = bubble.y - 220;
+					//Add it to the bubble vector
+					bubbles.push(newBubble);
+					//Add children
+					addChild(newBubble);
+					
+					//create a line
+					var line:BubbleLink = new BubbleLink(currentBubble.x, currentBubble.y, newBubble.x, newBubble.y);
+					line.x = currentBubble.x;
+					line.y = currentBubble.y;
+					newBubble.oncomingLine = line;
+					addChildAt(line, 0);
+				}
 			}
 			
 			//If we are going down, unstore top-side bubbles
@@ -108,11 +115,15 @@ package Gameplay
 		 */
 		private function disablingBubbles():void
 		{
+			//Disable Toggle
+			currentBubble.removeEventListener(MouseEvent.CLICK, toggleCurrentBubble);
+			
 			//Disabling bubbles
 			for (var i:int = 0; i < bubbles.length; i++) 
 			{
 				bubbles[i].removeEventListener(MouseEvent.CLICK, bubbleClicked);
 			}
+			
 		}
 		
 		/**
@@ -151,6 +162,7 @@ package Gameplay
 		{
 			//Cleaning event listeners(clicks)
 			disablingBubbles();
+			
 			
 			if (!currentBubble.colorSwitched) 
 			{
@@ -198,15 +210,16 @@ package Gameplay
 		private function contentDisplayed():void
 		{
 			//At this point, content is displayed and movements are over
-			//TODO add event on the current thing
+			// add event on the current thing
 			
 			currentBubble.addEventListener(MouseEvent.CLICK, toggleCurrentBubble);
 			
-			//TODO add event on other //TODO : change 3 for currentbubble.node.successors 
-			for (var i:int = 0; i < localScenario.getCurrent().getSuccessors().length; i++) 
+			//TODO : change 3 for currentbubble.node.successors 
+			for each(var successor:Node in currentBubble.node.getSuccessors())
 			{
-				bubbles[bubbles.length - (i+1)].addEventListener(MouseEvent.CLICK, bubbleClicked);
+				successor.bubble.addEventListener(MouseEvent.CLICK, bubbleClicked);
 			}
+			
 			
 			//TODO add Event Listener on the previous node
 			

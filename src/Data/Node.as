@@ -1,6 +1,7 @@
 package Data
 {
 	import flash.text.engine.ContentElement;
+	import Gameplay.Bubble;
 	
 	/**
 	 * ...
@@ -13,6 +14,8 @@ package Data
 		private var title:String;
 		private var predecessor:Node;
 		private var successors:Vector.<Node> = new Vector.<Node>();
+		
+		public var bubble:Bubble;
 		
 		public function Node() 
 		{

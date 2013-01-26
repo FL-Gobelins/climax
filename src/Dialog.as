@@ -14,7 +14,7 @@ package
 			this.dialog = dialog;
 		}
 		
-		public function Play():void
+		public function play():void
 		{
 			// Do the stuff
 		}

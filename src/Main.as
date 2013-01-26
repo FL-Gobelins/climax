@@ -12,6 +12,8 @@ package
 	 */
 	public class Main extends Sprite 
 	{
+		private var loader:Loader;
+		private var scenario:Tree;
 		
 		public function Main():void 
 		{
@@ -54,7 +56,10 @@ package
 		private function onLocalizedLoaded(e:Event):void
 		{
 			//Init XML global object
-			Global.xml = new XML(e.target.data);
+			//Global.xml = new XML(e.target.data);
+			
+			loader = new LoaderXML(new XML(e.target.data));
+			scenario = new Tree(loader);
 			
 			//Remove loading Screen
 			removeChild(loadingScreen);

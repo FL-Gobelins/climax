@@ -7,6 +7,6 @@ package
 	 */
 	public interface Content 
 	{
-		function Play():void;
+		function play():void;
 	}	
 }

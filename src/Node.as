@@ -12,10 +12,20 @@ package
 		private var predecessor:Node;
 		private var successors:Vector.<Node>;
 		
-		public function Node(predecessor:Node, content:Content):void {
+		public function Node() 
+		{
+			
+		}
+		
+		public function build(predecessor:Node, content:Content):void {
 			this.content = content;
 			this.predecessor = predecessor;
 			predecessor.AddSuccessor(this);
+		}
+		
+		public function getSuccessors():Vector.<Node>
+		{
+			return successors;
 		}
 		
 		/**
@@ -33,7 +43,7 @@ package
 		 */
 		protected function Play(content:Content):void
 		{
-			content.Play();
+			content.play();
 		}
 	}
 }

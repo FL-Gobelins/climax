@@ -2,6 +2,7 @@ package Gameplay
 {
 	import com.greensock.TweenMax;
 	import com.greensock.TweenMax;
+	import Data.Node;
 	import Data.Tree;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -54,7 +55,7 @@ package Gameplay
 			for (var l:int = 0; l < amount; l++) 
 			{
 				//Create a bubble
-				var newBubble:Bubble = new Bubble();
+				var newBubble:Bubble = new Bubble(new Node());
 				//TODO : add a node to the bubble
 				//place the bubble
 				newBubble.x = bubble.x - (Global.WIDTH / 2) + ((l+1) * spacer);

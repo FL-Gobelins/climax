@@ -32,19 +32,19 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\Leonard\Documents\Flash\Climax\src</path-element>
-      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets</path-element>
+      <path-element>C:\Users\flabat\Documents\Climax\src</path-element>
+      <path-element>C:\Users\flabat\Documents\Climax\assets</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>C:\Users\Leonard\Documents\Flash\Climax\lib\as3-signals-v0.8.swc</path-element>
-      <path-element>C:\Users\Leonard\Documents\Flash\Climax\lib\greensock.swc</path-element>
-      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\anims.swc</path-element>
-      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\nodes.swc</path-element>
+      <path-element>C:\Users\flabat\Documents\Climax\lib\as3-signals-v0.8.swc</path-element>
+      <path-element>C:\Users\flabat\Documents\Climax\lib\greensock.swc</path-element>
+      <path-element>C:\Users\flabat\Documents\Climax\assets\anims.swc</path-element>
+      <path-element>C:\Users\flabat\Documents\Climax\assets\nodes.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\Leonard\Documents\Flash\Climax\src\Main.as</path-element>
+    <path-element>C:\Users\flabat\Documents\Climax\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>24</default-frame-rate>

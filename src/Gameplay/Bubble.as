@@ -1,8 +1,13 @@
 package Gameplay 
 {
 	import com.greensock.TweenMax;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import org.osflash.signals.Signal;
+	import com.greensock.plugins.*;
+	
 	
 	/**
 	 * ...
@@ -10,6 +15,7 @@ package Gameplay
 	 */
 	public class Bubble extends Sprite 
 	{
+		public var colorSwitched:Boolean = false;
 		
 		public var stored:Boolean = false;
 		public var oncomingLine:BubbleLink;
@@ -19,8 +25,13 @@ package Gameplay
 		public var scaledUp:Signal;
 		public var scaledDown:Signal;
 		
+		private var mouseCurrentlyOver:Boolean = false;
+		
 		private var contentDisplay:Sprite = new Sprite();
 		
+		
+		private var openDisplay:OpenNode;
+		private var closeDisplay:CloseNode;
 		//TODO temp
 		private var round:Sprite;
 		
@@ -29,12 +40,32 @@ package Gameplay
 			scaledDown = new Signal();
 			scaledUp = new Signal();
 			
-			round = new Sprite();
-			round.graphics.beginFill(0xFF0000);
-			round.graphics.drawCircle(0, 0, 40);
+			TweenPlugin.activate([FramePlugin]);
+			buttonMode = true;
+			useHandCursor = true;
+			mouseChildren = false;
 			
-			addChild(round);
-			addChild(contentDisplay);
+			//round = new Sprite();
+			//round.graphics.beginFill(0xFF0000);
+			//round.graphics.drawCircle(0, 0, 40);
+			
+			openDisplay = new OpenNode();
+			openDisplay.display.gotoAndStop(1);
+			addChild(openDisplay);
+			
+			closeDisplay = new CloseNode();
+			closeDisplay.gotoAndStop(1);
+			addChild(closeDisplay);
+			closeDisplay.visible = false;
+			
+			//Add rotation
+			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			
+			width = height = 120;
+			
+			//addChild(contentDisplay);
 		}
 		
 		/**
@@ -43,7 +74,9 @@ package Gameplay
 		 */
 		public function clean():void
 		{
-			
+			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+			removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 		}
 		
 		public function displayContent():void
@@ -54,8 +87,8 @@ package Gameplay
 			
 			testAnim.stop();
 			
-			testAnim.width = 80;
-			testAnim.height = 80;
+			//testAnim.width = 80;
+			//testAnim.height = 80;
 			
 			contentDisplay.mask = round;
 		}
@@ -71,16 +104,17 @@ package Gameplay
 		
 		public function scaleUp():void
 		{
-			//TweenMax.killAll(true, true, true);
-			TweenMax.to(this, 0.6, { scaleX:4, scaleY:4, onComplete:callbackScaleUp } );
+			openDisplay.ring.visible = false;
+			TweenMax.to(openDisplay.display, 0.7, { frame:openDisplay.display.totalFrames, onComplete:callbackScaleUp } );
+			TweenMax.to(this, 0.7, { width:300, height:300 } );
 			open = true;
 		}
 		
 		public function scaleDown():void
 		{
 			hideContent();
-			//TweenMax.killAll(true, true, true);
-			TweenMax.to(this, 0.4, { scaleX:1, scaleY:1, onComplete:callbackScaleDown } );
+			TweenMax.to(openDisplay.display, 0.7, { frame:1, onComplete:callbackScaleDown } );
+			TweenMax.to(this, 0.7, { width:120, height:120 } );
 			open = false;
 		}
 		
@@ -92,9 +126,53 @@ package Gameplay
 		
 		private function callbackScaleDown():void
 		{
+			openDisplay.ring.visible = true;
 			scaledDown.dispatch();
 		}
 		
+		/**
+		 * Change orange to blue.
+		 * This is a one way trip : don't even think of coming back.
+		 * And don't look behind you either.
+		 */
+		public function switchColor():void
+		{
+			closeDisplay.visible = true;
+			openDisplay.visible = false;
+			
+			if (open) 
+			{
+				closeDisplay.display.gotoAndStop(1);
+				TweenMax.to(closeDisplay.display, 0.7, { frame:closeDisplay.display.totalFrames } );
+				TweenMax.to(this, 0.7, { width:120, height:120 } );
+			} else {
+				closeDisplay.display.gotoAndStop(closeDisplay.display.totalFrames);
+			}
+			
+			colorSwitched = true;
+		}
+		
+		//-------------------------------------------------------------------------------
+		//Event Manager
+		//-------------------------------------------------------------------------------
+		private function onEnterFrame(e:Event):void
+		{
+			//TODO : rotation
+			if (openDisplay.parent && !mouseCurrentlyOver) 
+			{
+				openDisplay.ring.rotation += 1.5;
+			}
+		}
+		
+		private function onMouseOver(e:MouseEvent):void
+		{
+			mouseCurrentlyOver = true;
+		}
+		
+		private function onMouseOut(e:MouseEvent):void
+		{
+			mouseCurrentlyOver = false;
+		}
 	}
 
 }

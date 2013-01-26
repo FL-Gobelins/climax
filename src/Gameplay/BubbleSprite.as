@@ -4,7 +4,10 @@ package Gameplay
 	import com.greensock.TweenMax;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.geom.ColorTransform;
 	import flash.geom.Point;
+	import flash.geom.Transform;
+	import flash.sampler.NewObjectSample;
 	
 	/**
 	 * ...
@@ -58,11 +61,18 @@ package Gameplay
 				//TODO : add a node to the bubble
 				//place the bubble
 				newBubble.x = bubble.x - (Global.WIDTH / 2) + ((l+1) * spacer);
-				newBubble.y = bubble.y - 200;
+				newBubble.y = bubble.y - 220;
 				//Add it to the bubble vector
 				bubbles.push(newBubble);
 				//Add children
 				addChild(newBubble);
+				
+				//create a line
+				var line:BubbleLink = new BubbleLink(currentBubble.x, currentBubble.y, newBubble.x, newBubble.y);
+				line.x = currentBubble.x;
+				line.y = currentBubble.y;
+				newBubble.oncomingLine = line;
+				addChildAt(line, 0);
 			}
 			
 			//If we are going down, unstore top-side bubbles
@@ -90,6 +100,7 @@ package Gameplay
 			currentBubble.scaledUp.addOnce(contentDisplayed);
 			currentBubble.scaleUp();
 			TweenMax.to(currentBubble, 0.6, { x:currentBubble.x + translateVector.x, y:currentBubble.y + translateVector.y } );
+			if (currentBubble.oncomingLine) TweenMax.to(currentBubble.oncomingLine, 0.6, { x:currentBubble.oncomingLine.x + translateVector.x, y:currentBubble.oncomingLine.y + translateVector.y } );
 			
 			//Clean bubbles
 			cleanBubbles(bubble, amount);
@@ -144,11 +155,25 @@ package Gameplay
 			//Cleaning event listeners(clicks)
 			disablingBubbles();
 			
-			currentBubble.scaleDown();
+			if (!currentBubble.colorSwitched) 
+			{
+				currentBubble.switchColor();
+			} else {
+				currentBubble.scaleDown();
+			}
 			
 			bubbles.splice(bubbles.indexOf((e.currentTarget as Bubble)), 1);	//pop the new bubble it out of the bubbles Vector
 			bubbles.push(currentBubble); // Put former current bubble in bubbles
 			currentBubble = (e.currentTarget as Bubble);//make it the currentBubble
+			
+			//Togle line color
+			var ctransform:ColorTransform = new ColorTransform();
+			ctransform.color = 0x248d9e;
+			if (currentBubble.oncomingLine) 
+			{
+				currentBubble.oncomingLine.transform.colorTransform = ctransform;
+			}
+			
 			(e.currentTarget as Bubble).stored = true; //Protect the path you selected
 			moveBubbles((e.currentTarget as Bubble)); //Move camera
 		}

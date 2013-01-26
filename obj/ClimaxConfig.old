@@ -40,6 +40,7 @@
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\lib\as3-signals-v0.8.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\lib\greensock.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\anims.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\nodes.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>

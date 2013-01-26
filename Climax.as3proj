@@ -54,6 +54,7 @@
     <element path="lib\as3-signals-v0.8.swc" />
     <element path="lib\greensock.swc" />
     <element path="assets\anims.swc" />
+    <element path="assets\nodes.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

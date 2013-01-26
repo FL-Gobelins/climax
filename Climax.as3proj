@@ -5,7 +5,7 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\Climax.swf" />
-    <movie fps="30" />
+    <movie fps="24" />
     <movie width="800" />
     <movie height="600" />
     <movie version="10" />
@@ -16,6 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
+    <class path="assets" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -52,6 +53,7 @@
   <libraryPaths>
     <element path="lib\as3-signals-v0.8.swc" />
     <element path="lib\greensock.swc" />
+    <element path="assets\anims.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

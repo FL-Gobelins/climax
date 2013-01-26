@@ -4,7 +4,7 @@
 			<title>
 				Think
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Amira is gonna leave me, for sure. I need to do something. But what?
 			</content>
 </node>
@@ -20,7 +20,7 @@
 			<title>
 				Better idea
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Doing nothing... Great idea. I know I can find better. Let's search!
 			</content>
 </node>
@@ -36,7 +36,7 @@
 			<title>
 				Dodge
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Dodging. My speciality. Maybe the key is here.
 			</content>
 </node>
@@ -44,7 +44,7 @@
 			<title>
 				Confrontation
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				I don't like confrontation, I've never done that. Is it time to begin?
 			</content>
 </node>
@@ -52,7 +52,7 @@
 			<title>
 				Her reason
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				No doubt why she wants to leave me, we are so different. I feel like a toad in love with a princess.
 			</content>
 </node>
@@ -68,7 +68,7 @@
 			<title>
 				Conversation
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Why not telling her to continue the conversation in another place? It will give me more time to think.
 			</content>
 </node>
@@ -84,7 +84,7 @@
 			<title>
 				Truth
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				In some way, I can't stand many things in her behaviour, her personnality... I would like she changes too.
 			</content>
 </node>
@@ -108,7 +108,7 @@
 			<title>
 				Her anger
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Sometimes, I feel she's angry because I'm not.
 			</content>
 </node>
@@ -116,7 +116,7 @@
 			<title>
 				My silence
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				It's my only shield against her. Against people, in general.
 			</content>
 </node>
@@ -132,7 +132,7 @@
 			<title>
 				Bored
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				When nothing happens in your life, your talk becomes uninteresting.
 			</content>
 </node>
@@ -140,7 +140,7 @@
 			<title>
 				Dreams
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				My dreams... Right now, I have no idea of what they are. They have been buried. When I was a kid, maybe...
 			</content>
 </node>
@@ -156,7 +156,7 @@
 			<title>
 				Deeper
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Was life better when I was a kid? Seems to be.
 			</content>
 </node>
@@ -188,7 +188,7 @@
 			<title>
 				The nice time
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				I was a good seducer, I remember! Today, I'm shy like no one.
 			</content>
 </node>
@@ -196,7 +196,7 @@
 			<title>
 				Trust in myself
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				I live in the shadow of Amira. Is it a normal situation? I'd feel better by having a less perfect girlfriend.
 			</content>
 </node>
@@ -220,7 +220,7 @@
 			<title>
 				Travels
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				The more she's traveling for his job, the less we can spend time together. I feel like she's running away from me.
 			</content>
 </node>
@@ -236,7 +236,7 @@
 			<title>
 				My fault
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				I'm to depressing for a girl like her. If I were her, of course I'd prefer to travel alone!
 			</content>
 </node>
@@ -252,7 +252,7 @@
 			<title>
 				Changing
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Why am I no longer able to make her happy anymore? Something changed in me. Need to find it before she leaves.
 			</content>
 </node>
@@ -260,7 +260,7 @@
 			<title>
 				Sadness
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				Why do I feel so depressed? I have a house, a job, and still a girlfriend. Every needed ingredients to hapiness.
 			</content>
 </node>
@@ -268,7 +268,7 @@
 			<title>
 				Money
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				If only I could offer her something she coulnd't buy... Real men aren't supposed to be richer than their girlfriends? Don't want to be a drag for her.
 			</content>
 </node>
@@ -276,7 +276,7 @@
 			<title>
 				Importance of money
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				We were happy together, at the begining. Two poor young lovers. Maybe money is not so important. This is not the solution...
 			</content>
 </node>
@@ -284,7 +284,7 @@
 			<title>
 				New job
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				MaClassAnimation
 			</content>
 </node>
@@ -292,7 +292,7 @@
 			<title>
 				Drag
 			</title>
-			<content type="text"> 
+			<content type="dialog"> 
 				I am already a drag! Always complaining about my life, nothing fun to say, needing her each time I feel bad...
 			</content>
 </node>

@@ -7,6 +7,7 @@ package Data
 	 */
 	public interface Loader 
 	{
+		function parent():Node;
 	}
 	
 }

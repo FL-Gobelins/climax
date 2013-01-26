@@ -2,7 +2,7 @@ package Data
 {
 	
 	/**
-	 * ...
+	 * Tree that store typicaly a scenario
 	 * @author Franck Labat
 	 */
 	public class Tree
@@ -15,13 +15,7 @@ package Data
 		public function Tree(loader:Loader):void
 		{
 			this.loader = loader;
-			build();
-			current = parent;
-		}
-		
-		private function build():void
-		{
-			DFS(parent, new Builder(loader));
+			parent = current = loader.parent();
 		}
 		
 		/**

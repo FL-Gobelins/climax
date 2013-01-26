@@ -30,9 +30,8 @@ package Gameplay
 			var bubble:Bubble = new Bubble(scenario.getCurrent());
 			bubble.x = 400;
 			bubble.y = 300;
-			bubble.stored = true;
-			bubble.scaleUp();
 			currentBubble = bubble;
+			currentBubble.addEventListener(MouseEvent.CLICK, bubbleClicked);
 			addChild(bubble);
 		}
 		
@@ -48,14 +47,14 @@ package Gameplay
 		{
 			//Add out-of-field bubbles -------------------------------------------------------------------------------------------------
 			//TODO TEMP
-			var amount:int = 3; // int(Math.random() * 5) + 1;//This should be equales to bubbleClicked.node.successors.length
+			var amount:int = localScenario.getCurrent().getSuccessors().length;//3; // int(Math.random() * 5) + 1;//This should be equales to bubbleClicked.node.successors.length
 			
 			var spacer:int = Global.WIDTH / (amount + 1); //spacer between two new bubbles
 			//we place a new bubble at each spacer
 			for (var l:int = 0; l < amount; l++) 
 			{
 				//Create a bubble
-				var newBubble:Bubble = new Bubble(new Node());
+				var newBubble:Bubble = new Bubble(localScenario.getCurrent().getSuccessors()[l]);
 				//TODO : add a node to the bubble
 				//place the bubble
 				newBubble.x = bubble.x - (Global.WIDTH / 2) + ((l+1) * spacer);
@@ -126,7 +125,7 @@ package Gameplay
 			//Clean everything not stored and not added in the last move (that's the -newBubblesAmount thingy)
 			for (var i:int = 0; i < (bubbles.length - newBubblesAmount); i++) 
 			{
-				if (!bubbles[i].stored ) 
+				if (!bubbles[i].node.visited ) 
 				{
 					//If bubble is not stored, it is either on a unused branch or geting out of the screen by the top
 					//TODO : tweenout bubble
@@ -164,6 +163,8 @@ package Gameplay
 			bubbles.push(currentBubble); // Put former current bubble in bubbles
 			currentBubble = (e.currentTarget as Bubble);//make it the currentBubble
 			
+			localScenario.next(((e.currentTarget) as Bubble).node.id);
+			
 			//Togle line color
 			var ctransform:ColorTransform = new ColorTransform();
 			ctransform.color = 0x248d9e;
@@ -172,7 +173,7 @@ package Gameplay
 				currentBubble.oncomingLine.transform.colorTransform = ctransform;
 			}
 			
-			(e.currentTarget as Bubble).stored = true; //Protect the path you selected
+			(e.currentTarget as Bubble).node.visited = true; //Protect the path you selected
 			moveBubbles((e.currentTarget as Bubble)); //Move camera
 		}
 		
@@ -202,10 +203,13 @@ package Gameplay
 			currentBubble.addEventListener(MouseEvent.CLICK, toggleCurrentBubble);
 			
 			//TODO add event on other //TODO : change 3 for currentbubble.node.successors 
-			for (var i:int = 0; i < 3; i++) 
+			for (var i:int = 0; i < localScenario.getCurrent().getSuccessors().length; i++) 
 			{
 				bubbles[bubbles.length - (i+1)].addEventListener(MouseEvent.CLICK, bubbleClicked);
 			}
+			
+			//TODO add Event Listener on the previous node
+			
 		}
 	}
 

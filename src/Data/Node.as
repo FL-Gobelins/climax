@@ -36,6 +36,8 @@ package Data
 			successors.push(successor);
 		}
 		
+		private var _visited:Boolean = false;
+		
 		/**
 		 * 
 		 * @param	predecessor
@@ -59,10 +61,26 @@ package Data
 			this.title = title;
 		}
 		
+		public function getTitle():String
+		{
+			return title;
+		}
+		
+		
 		public function toString():String
 		{
 			//TODO: print the content after finishing content classes 
 			return id + title + " ";// + content.toString() + " ";
+		}
+		
+		public function get visited():Boolean 
+		{
+			return _visited;
+		}
+		
+		public function set visited(value:Boolean):void 
+		{
+			_visited = value;
 		}
 	}
 }

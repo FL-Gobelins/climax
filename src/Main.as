@@ -15,6 +15,7 @@ package
 	{
 		private var loader:Loader;
 		private var scenario:Tree;
+		private var bubbleSprite:BubbleSprite;
 		
 		public function Main():void 
 		{
@@ -61,12 +62,13 @@ package
 			
 			loader = new LoaderXML(new XML(e.target.data));
 			scenario = new Tree(loader);
+			bubbleSprite = new BubbleSprite(scenario);
 			
 			//Remove loading Screen
 			removeChild(loadingScreen);
 			
 			//TODO temp
-			addChild(new BubbleSprite());
+			addChild(bubbleSprite);
 		}
 		
 	}

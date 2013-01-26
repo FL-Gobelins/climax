@@ -18,7 +18,7 @@ package Data
 			start = current = loader.parent();
 			var printer:Printer = new Printer();
 			//BFS(start, printer);
-			DFS(start, printer);
+			//DFS(start, printer);
 		}
 		
 		/**

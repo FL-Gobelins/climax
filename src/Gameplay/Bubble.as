@@ -1,6 +1,7 @@
 package Gameplay 
 {
 	import com.greensock.TweenMax;
+	import Data.Node;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -29,14 +30,17 @@ package Gameplay
 		
 		private var contentDisplay:Sprite = new Sprite();
 		
+		public var node:Node;
 		
 		private var openDisplay:OpenNode;
 		private var closeDisplay:CloseNode;
 		//TODO temp
 		private var round:Sprite;
 		
-		public function Bubble() 
+		public function Bubble(nodeParam:Node) 
 		{
+			node = nodeParam;
+			
 			scaledDown = new Signal();
 			scaledUp = new Signal();
 			

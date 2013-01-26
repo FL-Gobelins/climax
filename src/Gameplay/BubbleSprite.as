@@ -2,6 +2,7 @@ package Gameplay
 {
 	import com.greensock.TweenMax;
 	import com.greensock.TweenMax;
+	import Data.Tree;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
@@ -19,22 +20,18 @@ package Gameplay
 		public var bubbles:Vector.<Bubble> = new Vector.<Bubble>();
 		public var currentBubble:Bubble;
 		
-		public function BubbleSprite() 
+		private var localScenario:Tree;
+		
+		public function BubbleSprite(scenario:Tree) 
 		{
-			//TODO : place holders
-			var bubble:Bubble = new Bubble();
+			localScenario = scenario;
+			
+			var bubble:Bubble = new Bubble(scenario.getCurrent());
 			bubble.x = 400;
 			bubble.y = 300;
 			bubble.stored = true;
 			bubble.scaleUp();
 			currentBubble = bubble;
-			addChild(bubble);
-			
-			bubble = new Bubble();
-			bubble.x = 600;
-			bubble.y = 100;
-			bubbles.push(bubble);
-			bubble.addEventListener(MouseEvent.CLICK, bubbleClicked);
 			addChild(bubble);
 		}
 		

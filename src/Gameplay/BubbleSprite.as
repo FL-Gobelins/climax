@@ -23,7 +23,7 @@ package Gameplay
 			bubble.x = 400;
 			bubble.y = 300;
 			bubble.stored = true;
-			bubbles.push(bubble);
+			bubble.scaleUp();
 			currentBubble = bubble;
 			addChild(bubble);
 			
@@ -35,16 +35,9 @@ package Gameplay
 			addChild(bubble);
 		}
 		
-		/**
-		 * Click handler for an active bubble clicked
-		 * @param	e
-		 */
-		private function bubbleClicked(e:MouseEvent):void
-		{
-			(e.currentTarget as Bubble).stored = true; //Protect the path you selected
-			currentBubble = (e.currentTarget as Bubble);//make it the currentBubble
-			moveBubbles((e.currentTarget as Bubble)); //Move camera
-		}
+		//-----------------------------------------------------
+		//Methods
+		//-----------------------------------------------------
 		
 		/**
 		 * Move the given bubble to the center of the screen and handl the dependencies
@@ -52,15 +45,9 @@ package Gameplay
 		 */
 		private function moveBubbles(bubble:Bubble):void
 		{
-			//Disabling bubbles
-			for (var i:int = 0; i < bubbles.length; i++) 
-			{
-				bubbles[i].removeEventListener(MouseEvent.CLICK, bubbleClicked);
-			}
-			
-			//Add out-of-field bubbles
+			//Add out-of-field bubbles -------------------------------------------------------------------------------------------------
 			//TODO TEMP
-			var amount:int = int(Math.random()*5)+1;//This should be equales to bubbleClicked.node.successors.length
+			var amount:int = 3; // int(Math.random() * 5) + 1;//This should be equales to bubbleClicked.node.successors.length
 			
 			var spacer:int = Global.WIDTH / (amount + 1); //spacer between two new bubbles
 			//we place a new bubble at each spacer
@@ -88,36 +75,36 @@ package Gameplay
 			var currentY:int = bubble.y;
 			var translateVector:Point = new Point(destX - currentX, destY - currentY);
 			
-			//Moving everything
+			//Moving everything except for the current bubble
 			for (var j:int = 0; j < bubbles.length; j++) 
 			{
-				//If this is the currentBubble, add a specific callback about size
-				if (bubbles[j] == currentBubble) 
-				{
-					 TweenMax.to(bubbles[j], 0.6, { x:bubbles[j].x + translateVector.x, y:bubbles[j].y + translateVector.y, scaleX:2, scaleY:2, onComplete:displayBubbleContent, onCompleteParams:[bubble] } );
-				} else {
-					TweenMax.to(bubbles[j], 0.6, { x:bubbles[j].x + translateVector.x, y:bubbles[j].y + translateVector.y } );
-				}
+				if (bubbles[j].open){bubbles[j].scaleDown()};
 				
+				TweenMax.to(bubbles[j], 0.6, { x:bubbles[j].x + translateVector.x, y:bubbles[j].y + translateVector.y } );
 				
-				if (bubbles[j].oncomingLine) 
-				{
-					TweenMax.to(bubbles[j].oncomingLine, 0.6, { x:bubbles[j].oncomingLine.x + translateVector.x, y:bubbles[j].oncomingLine.y + translateVector.y } );
-				}
+				//If there is a line, handle it too
+				if (bubbles[j].oncomingLine) TweenMax.to(bubbles[j].oncomingLine, 0.6, { x:bubbles[j].oncomingLine.x + translateVector.x, y:bubbles[j].oncomingLine.y + translateVector.y } );
 			}
 			
-			//Enabling clickable bubbles
-			for (var m:int = 0; m < amount; m++) 
-			{
-				//Enabling top-side bubbles
-				(bubbles[bubbles.length - (1 + m)] as Bubble).addEventListener(MouseEvent.CLICK, bubbleClicked);
-			}
-			bubble.addEventListener(MouseEvent.CLICK, bubbleClicked); //Enabling going back //TODO : get bubble trhough bubble.node.previous
-			
+			//Move the currentBubble
+			currentBubble.scaledUp.addOnce(contentDisplayed);
+			currentBubble.scaleUp();
+			TweenMax.to(currentBubble, 0.6, { x:currentBubble.x + translateVector.x, y:currentBubble.y + translateVector.y } );
 			
 			//Clean bubbles
 			cleanBubbles(bubble, amount);
-			
+		}
+		
+		/**
+		 * Cleaning click listeners on the current stage
+		 */
+		private function disablingBubbles():void
+		{
+			//Disabling bubbles
+			for (var i:int = 0; i < bubbles.length; i++) 
+			{
+				bubbles[i].removeEventListener(MouseEvent.CLICK, bubbleClicked);
+			}
 		}
 		
 		/**
@@ -127,7 +114,7 @@ package Gameplay
 		 */
 		private function cleanBubbles(bubble:Bubble, newBubblesAmount:int):void
 		{
-			//Clean everything not stored
+			//Clean everything not stored and not added in the last move (that's the -newBubblesAmount thingy)
 			for (var i:int = 0; i < (bubbles.length - newBubblesAmount); i++) 
 			{
 				if (!bubbles[i].stored ) 
@@ -144,31 +131,59 @@ package Gameplay
 			}
 		}
 		
-		/**
-		 * Handle memory on the unused bubbles
-		 * @param	bubble
-		 */
-		private function garbageCollectBubble(bubble:Bubble):void
-		{
-			removeChild(bubble);
-			bubbles.splice(bubbles.indexOf(bubble), 1);
-			if (bubble.oncomingLine) 
-			{
-				removeChild(bubble.oncomingLine);
-			}
-			bubble.clean();
-		}
+		//-----------------------------------------------------
+		//Event listeners
+		//-----------------------------------------------------
 		
 		/**
-		 * 
-		 * @param	bubble
+		 * Click handler for an active bubble
+		 * @param	e
 		 */
-		private function displayBubbleContent(bubble:Bubble):void
+		private function bubbleClicked(e:MouseEvent):void
 		{
+			//Cleaning event listeners(clicks)
+			disablingBubbles();
 			
+			currentBubble.scaleDown();
+			
+			bubbles.splice(bubbles.indexOf((e.currentTarget as Bubble)), 1);	//pop the new bubble it out of the bubbles Vector
+			bubbles.push(currentBubble); // Put former current bubble in bubbles
+			currentBubble = (e.currentTarget as Bubble);//make it the currentBubble
+			(e.currentTarget as Bubble).stored = true; //Protect the path you selected
+			moveBubbles((e.currentTarget as Bubble)); //Move camera
 		}
 		
+		/**
+		 * Click handler for the current  Bubble (toggling big/small)
+		 * @param	e
+		 */
+		private function toggleCurrentBubble(e:MouseEvent):void
+		{
+			if (currentBubble.open) 
+			{
+				currentBubble.scaleDown();
+			} else {
+				currentBubble.scaleUp();
+			}
+		}
 		
+		//-----------------------------------------------------
+		//Signal listeners
+		//-----------------------------------------------------
+		
+		private function contentDisplayed():void
+		{
+			//At this point, content is displayed and movements are over
+			//TODO add event on the current thing
+			
+			currentBubble.addEventListener(MouseEvent.CLICK, toggleCurrentBubble);
+			
+			//TODO add event on other //TODO : change 3 for currentbubble.node.successors 
+			for (var i:int = 0; i < 3; i++) 
+			{
+				bubbles[bubbles.length - (i+1)].addEventListener(MouseEvent.CLICK, bubbleClicked);
+			}
+		}
 	}
 
 }

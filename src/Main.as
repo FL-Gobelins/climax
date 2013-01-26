@@ -4,6 +4,7 @@ package
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import Gameplay.BubbleSprite;
 	
 	/**
 	 * ...
@@ -57,6 +58,9 @@ package
 			
 			//Remove loading Screen
 			removeChild(loadingScreen);
+			
+			//TODO temp
+			addChild(new BubbleSprite());
 		}
 		
 	}

@@ -15,15 +15,13 @@ package Data
 		public function Tree(loader:Loader):void
 		{
 			this.loader = loader;
-			//TODO: build tree with xml datas
-			//build(parent);
+			build();
 			current = parent;
 		}
 		
 		private function build():void
 		{
-			//TODO : Implement the build with DFS
-			//BFS(parent, builder);
+			DFS(parent, new Builder(loader));
 		}
 		
 		/**
@@ -55,3 +53,4 @@ package Data
 		}
 	}
 }
+

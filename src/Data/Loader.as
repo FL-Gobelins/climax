@@ -7,7 +7,6 @@ package Data
 	 */
 	public interface Loader 
 	{
-		
 	}
 	
 }

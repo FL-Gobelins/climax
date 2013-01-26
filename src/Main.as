@@ -44,10 +44,10 @@ package
 			addChild(loadingScreen);
 			
 			//Load Localized file
-			var url:URLRequest = new URLRequest("localize.xml");
-			var loader:URLLoader = new URLLoader();
-			loader.addEventListener(Event.COMPLETE, onLocalizedLoaded);
-			loader.load(url);
+			var url:URLRequest = new URLRequest("LevelTest.xml");
+			var urlLoader:URLLoader = new URLLoader();
+			urlLoader.addEventListener(Event.COMPLETE, onLocalizedLoaded);
+			urlLoader.load(url);
 		}
 		
 		/**

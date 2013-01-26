@@ -5,13 +5,13 @@ package Data
 	 * ...
 	 * @author ...
 	 */
-	public class Dialog extends Content 
+	public class Dialog implements Content 
 	{
-		private var dialog:String;
+		private var value:String;
 		
-		public function Dialog(dialog:String):void
+		public function Dialog(value:String):void
 		{
-			this.dialog = dialog;
+			this.value = value;
 		}
 		
 		public function play():void

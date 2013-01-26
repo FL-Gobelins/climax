@@ -11,16 +11,14 @@ package Data
 		private var content:Content;
 		private var predecessor:Node;
 		private var successors:Vector.<Node>;
+		private var id:int;
 		
 		public function Node() 
 		{
-			
 		}
 		
-		public function build(predecessor:Node, content:Content):void {
+		public function setContent(content:Content):void {
 			this.content = content;
-			this.predecessor = predecessor;
-			predecessor.AddSuccessor(this);
 		}
 		
 		public function getSuccessors():Vector.<Node>
@@ -32,7 +30,7 @@ package Data
 		 *
 		 * @param	successor
 		 */
-		private function AddSuccessor(successor:Node):void 
+		public function addSuccessors(successor:Node):void 
 		{
 			successors.push(successor);
 		}

@@ -38,8 +38,9 @@ package Gameplay
 			scenario.getCurrent().bubble = bubble;
 			bubble.x = 400;
 			bubble.y = 300;
-			currentBubble = bubble;
-			currentBubble.addEventListener(MouseEvent.CLICK, bubbleClicked);
+			bubbles.push(bubble);
+			//currentBubble = bubble;
+			bubble.addEventListener(MouseEvent.CLICK, bubbleClicked);
 			addChild(bubble);
 			
 			if (stage) init();
@@ -150,7 +151,10 @@ package Gameplay
 		private function disablingBubbles():void
 		{
 			//Disable Toggle
-			currentBubble.removeEventListener(MouseEvent.CLICK, toggleCurrentBubble);
+			if (currentBubble) 
+			{
+				currentBubble.removeEventListener(MouseEvent.CLICK, toggleCurrentBubble);
+			}
 			
 			//Disabling bubbles
 			for (var i:int = 0; i < bubbles.length; i++) 
@@ -215,22 +219,30 @@ package Gameplay
 				SoundManager.getInstance().boomBoom();
 			}
 			
-			if (!currentBubble.colorSwitched) 
+			if (currentBubble) 
 			{
-				currentBubble.switchColor();
-			} else {
-				currentBubble.scaleDown();
+				if (!currentBubble.colorSwitched) 
+			{
+					currentBubble.switchColor();
+				} else {
+					currentBubble.scaleDown();
+				}
+				
+				if ((e.currentTarget as Bubble).node == currentBubble.node.getPredecessor())
+				{
+					localScenario.previous();
+				} else {
+					localScenario.next(((e.currentTarget) as Bubble).node.id);
+				}
+				
+				bubbles.splice(bubbles.indexOf((e.currentTarget as Bubble)), 1);	//pop the new bubble it out of the bubbles Vector
+				bubbles.push(currentBubble); // Put former current bubble in bubbles
 			}
 			
-			if ((e.currentTarget as Bubble).node == currentBubble.node.getPredecessor())
-			{
-				localScenario.previous();
-			} else {
-				localScenario.next(((e.currentTarget) as Bubble).node.id);
-			}
 			
-			bubbles.splice(bubbles.indexOf((e.currentTarget as Bubble)), 1);	//pop the new bubble it out of the bubbles Vector
-			bubbles.push(currentBubble); // Put former current bubble in bubbles
+			
+			
+			
 			currentBubble = (e.currentTarget as Bubble);//make it the currentBubble
 			
 			//Togle line color

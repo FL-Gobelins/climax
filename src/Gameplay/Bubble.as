@@ -59,35 +59,37 @@ package Gameplay
 			openDisplay = new OpenNode();
 			openDisplay.display.gotoAndStop(1);
 			addChild(openDisplay);
-<<<<<<< HEAD
-=======
 			openDisplay.txt_label.text = node.getTitle();
-			openDisplay.txt_dialog.visible = false;
->>>>>>> 5271bfaf70ad6a01c1ab3827ab2bdac1a6e78d00
 			
 			closeDisplay = new CloseNode();
 			closeDisplay.gotoAndStop(1);
 			addChild(closeDisplay);
 			closeDisplay.visible = false;
-<<<<<<< HEAD
 			dialog = new DialogBox();
 			dialog.x += dialog.width / 2;
 			dialog.y += dialog.height / 2;
 			dialog.visible = false;
-			addChild(DialogBox);
-=======
+			dialog.mouseEnabled = false;
+			dialog.mouseEnabled = false;
+			//addChild(dialog);
 			closeDisplay.txt_label.visible = false;
-			closeDisplay.txt_dialog.visible = false;
->>>>>>> 5271bfaf70ad6a01c1ab3827ab2bdac1a6e78d00
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			
-			width = height = 120;
+			width = height = 180;
 			
 			//addChild(contentDisplay);
+			
+			if (stage) init();
+			else addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		private function init(e:Event = null):void
+		{
+			
 		}
 		
 		/**
@@ -99,25 +101,38 @@ package Gameplay
 			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			
+			if (dialog.parent) 
+			{
+				dialog.parent.removeChild(dialog);
+			}
 		}
 		
 		public function displayContent():void
 		{
-			
-
+			dialog.visible = true;
 			var content:Content = node.getContent();
 			if (content is Dialog)
 			{
-				openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = true;
-				openDisplay.txt_dialog.text = closeDisplay.txt_dialog.text = (content as Dialog).toString();
+				if (parent) 
+				{
+					parent.addChild(dialog);
+					dialog.mouseEnabled = false;
+					dialog.mouseChildren = false;
+					dialog.x = x - dialog.width / 2;
+					dialog.y = y - dialog.height / 2;
+				}
+			
+				
+				dialog.txt_dialog.text = (content as Dialog).toString();
+				trace((content as Dialog).toString());
 			}
 			contentDisplay.mask = round;
 		}
 		
 		public function hideContent():void
 		{
-			openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = false;
-			openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = false;
+			dialog.visible = false;
 		}
 		
 		//-------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ package Data
 	 * ...
 	 * @author Franck Labat
 	 */
-	public class ContentImage
+	public class ContentImage implements Content
 	{
 		private var nameReference:String;
 		

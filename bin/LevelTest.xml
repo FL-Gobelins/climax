@@ -101,7 +101,7 @@
 				Past arguments
 			</title>
 			<content type="image"> 
-				MaClassImage
+				coupleIgnoring
 			</content>
 </node>
 <node id="13" parent="12">
@@ -173,15 +173,15 @@
 				Friends
 			</title>
 			<content type="image"> 
-				MaClassImage
+				johnKidFriends
 			</content>
 </node>
 <node id="22" parent="19">
 			<title>
 				Ambitions
 			</title>
-			<content type="animation"> 
-				MaClassAnimation
+			<content type="image"> 
+				johnKidSpace
 			</content>
 </node>
 <node id="23" parent="20">
@@ -229,7 +229,7 @@
 				Her fault
 			</title>
 			<content type="image"> 
-				MaClassImage
+				cheatingAmira
 			</content>
 </node>
 <node id="29" parent="26">
@@ -244,8 +244,8 @@
 			<title>
 				Happiness
 			</title>
-			<content type="animation"> 
-				MaClassAnimation
+			<content type="image"> 
+				smileCouple
 			</content>
 </node>
 <node id="31" parent="30">
@@ -284,8 +284,8 @@
 			<title>
 				New job
 			</title>
-			<content type="text"> 
-				MaClassAnimation
+			<content type="image"> 
+				applicationJohn
 			</content>
 </node>
 <node id="36" parent="33">

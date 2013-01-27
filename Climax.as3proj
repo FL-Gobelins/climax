@@ -57,6 +57,7 @@
     <element path="assets\nodes.swc" />
     <element path="assets\intro.swc" />
     <element path="assets\pictures.swc" />
+    <element path="assets\breackUp.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

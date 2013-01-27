@@ -2,6 +2,7 @@ package Gameplay
 {
 	import com.greensock.TweenMax;
 	import Data.Content;
+	import Data.ContentImage;
 	import Data.Dialog;
 	import Data.Node;
 	import flash.display.MovieClip;
@@ -74,7 +75,8 @@ package Gameplay
 			dialog.mouseEnabled = false;
 			//addChild(dialog);
 			closeDisplay.txt_label.visible = false;
-			imageDisplay.gotoAndStop(1);
+			imageDisplay = new PictoBank();
+			//imageDisplay.gotoAndStop(1);
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -128,7 +130,7 @@ package Gameplay
 			
 				
 				dialog.txt_dialog.text = (content as Dialog).toString();
-				trace((content as Dialog).toString());
+				//trace((content as Dialog).toString());
 			}
 			
 			//HANDLE ContentImage
@@ -136,13 +138,21 @@ package Gameplay
 			{
 				if (parent) 
 				{
+					imageDisplay.width = 400;
+					imageDisplay.height = 300;
 					parent.addChild(imageDisplay);
-					imageDisplay.x = x;
-					imageDisplay.y = y;
+					imageDisplay.x = x - 200;
+					imageDisplay.y = y - 150;
 					
-					imageDisplay.gotoAndPlay((content as ContentImage).toString);
+					imageDisplay.mouseEnabled = false;
+					imageDisplay.mouseChildren = false;
+					
+					//trace((content as ContentImage).toString());
+					imageDisplay.gotoAndStop((content as ContentImage).toString());
 				}
 			}
+			
+			//HANDLE content LOLPENIS Clip
 			
 			
 			//else if (content is ContentSound)

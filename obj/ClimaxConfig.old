@@ -39,10 +39,16 @@
     <library-path append="true">
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\lib\as3-signals-v0.8.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\lib\greensock.swc</path-element>
-      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\anims.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\nodes.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\intro.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\pictures.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\breackUp.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\accept.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\runAway.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\hateHer.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\changePlace.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\anim_son_jobs.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\apologize.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>

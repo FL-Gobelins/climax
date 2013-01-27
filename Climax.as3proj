@@ -53,11 +53,16 @@
   <libraryPaths>
     <element path="lib\as3-signals-v0.8.swc" />
     <element path="lib\greensock.swc" />
-    <element path="assets\anims.swc" />
     <element path="assets\nodes.swc" />
     <element path="assets\intro.swc" />
     <element path="assets\pictures.swc" />
     <element path="assets\breackUp.swc" />
+    <element path="assets\accept.swc" />
+    <element path="assets\runAway.swc" />
+    <element path="assets\hateHer.swc" />
+    <element path="assets\changePlace.swc" />
+    <element path="assets\anim_son_jobs.swc" />
+    <element path="assets\apologize.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

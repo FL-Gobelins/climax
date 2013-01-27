@@ -27,10 +27,13 @@ package Gameplay
 		
 		private var localScenario:Tree;
 		private var firstClicked:Boolean = true;
+		private var bg:GameplayBackground = new GameplayBackground();
 		
 		public function BubbleSprite(scenario:Tree) 
 		{
 			localScenario = scenario;
+			
+			addChild(bg);
 			
 			requestHeartbeat = new Signal();
 			

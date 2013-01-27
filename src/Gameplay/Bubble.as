@@ -39,6 +39,8 @@ package Gameplay
 		private var closeDisplay:CloseNode;
 		private var dialog:DialogBox;
 		private var imageDisplay:PictoBank;
+		private var clipDisplay:MovieClip;
+		
 		//TODO temp
 		private var round:Sprite;
 		
@@ -77,6 +79,8 @@ package Gameplay
 			closeDisplay.txt_label.visible = false;
 			imageDisplay = new PictoBank();
 			//imageDisplay.gotoAndStop(1);
+			clipDisplay = new MovieClip();
+			clipDisplay.visible = false;
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -106,10 +110,7 @@ package Gameplay
 			removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			
-			if (dialog.parent) 
-			{
-				dialog.parent.removeChild(dialog);
-			}
+			hideContent();
 		}
 		
 		public function displayContent():void
@@ -153,6 +154,13 @@ package Gameplay
 			}
 			
 			//HANDLE content LOLPENIS Clip
+			if (content is Content) 
+			{
+				if (parent) 
+				{
+					
+				}
+			}
 			
 			
 			//else if (content is ContentSound)
@@ -171,6 +179,11 @@ package Gameplay
 			{
 				imageDisplay.parent.removeChild(imageDisplay);
 			}
+			if (clipDisplay.parent) 
+			{
+				clipDisplay.parent.removeChild(clipDisplay);
+			}
+			
 		}
 		
 		//-------------------------------------------------------------------------------

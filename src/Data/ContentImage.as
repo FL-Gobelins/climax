@@ -1,4 +1,4 @@
-package 
+package Data
 {
 	
 	/**
@@ -9,7 +9,7 @@ package
 	{
 		private var nameReference:String;
 		
-		public function Dialog(nameReference:String):void
+		public function ContentImage(nameReference:String):void
 		{
 			this.nameReference = nameReference;
 		}

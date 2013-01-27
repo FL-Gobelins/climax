@@ -1,9 +1,9 @@
-package 
+package Data
 {
 	
 	/**
 	 * ...
-	 * @author ...
+	 * @author Franck Labat
 	 */
 	public class ContentSound 
 	{

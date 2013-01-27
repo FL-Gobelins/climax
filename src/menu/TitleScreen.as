@@ -80,7 +80,7 @@ package menu
 				display.clip.stop();
 				//unzoom and scroll up
 				TweenMax.killTweensOf(display.clip);
-				TweenMax.to(display.clip, 1, { scaleX:4, scaleY:4, y:display.clip.y, x:display.clip.x-60 } );
+				TweenMax.to(display.clip, 1, { scaleX:4, scaleY:4, y:display.clip.y - 100, x:display.clip.x-60 } );
 				//Need a bubbleSprite
 				TweenMax.delayedCall(1, function():void {
 					

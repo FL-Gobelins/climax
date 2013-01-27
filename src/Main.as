@@ -6,6 +6,8 @@ package
 	import flash.net.URLRequest;
 	import Gameplay.BubbleSprite;
 	import Data.*;
+	import menu.TitleScreen;
+	import com.greensock.TweenMax;
 	
 	/**
 	 * ...
@@ -16,6 +18,7 @@ package
 		private var loader:Loader;
 		private var scenario:Tree;
 		private var bubbleSprite:BubbleSprite;
+		private var titleScreen:TitleScreen;
 		
 		public function Main():void 
 		{
@@ -63,14 +66,22 @@ package
 			loader = new LoaderXML(new XML(e.target.data));
 			scenario = new Tree(loader);
 			bubbleSprite = new BubbleSprite(scenario);
+			titleScreen = new TitleScreen();
+			
+			titleScreen.requestLaunchGame.addOnce(launchGameRequested);
 			
 			//Remove loading Screen
 			removeChild(loadingScreen);
 			
 			//TODO temp
-			addChild(bubbleSprite);
+			addChild(titleScreen);
 		}
 		
+		private function launchGameRequested():void 
+		{
+			addChild(bubbleSprite);
+			TweenMax.to(titleScreen, 3, { y:titleScreen.y + 500, onComplete:cleanTitleScreen } );
+		}
 	}
 	
 }

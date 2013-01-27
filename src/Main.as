@@ -6,7 +6,6 @@ package
 	import flash.net.URLRequest;
 	import Gameplay.BubbleSprite;
 	import Data.*;
-	import manager.HeartBeatManager;
 	import menu.TitleScreen;
 	import com.greensock.TweenMax;
 	import org.osflash.signals.Signal;
@@ -21,7 +20,6 @@ package
 		private var scenario:Tree;
 		private var bubbleSprite:BubbleSprite;
 		private var titleScreen:TitleScreen;
-		private var heartBeatManager:HeartBeatManager;
 		public var requestGameOver:Signal = new Signal();
 		private var beat:int = 12;
 		
@@ -69,8 +67,6 @@ package
 			scenario = new Tree(loader);
 			bubbleSprite = new BubbleSprite(scenario);
 			titleScreen = new TitleScreen();
-			heartBeatManager = new HeartBeatManager();
-			
 			titleScreen.requestLaunchGame.addOnce(launchGameRequested);
 			bubbleSprite.requestHeartbeat.add(manageHeartBeat);
 			
@@ -97,8 +93,10 @@ package
 			beat--;
 			if (beat <= 0)
 			{
-				loadingScreen.graphics.beginFill(0xfffff, 0.0);
-				loadingScreen.graphics.drawRect(0, 0, 800, 600);
+				var sprite:Sprite = new Sprite();
+				sprite.graphics.beginFill(0xfffff, 0.0);
+				sprite.graphics.drawRect(0, 0, 800, 600);
+				addChild(sprite);
 			}
 		}
 	}

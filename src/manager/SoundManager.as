@@ -99,6 +99,32 @@ package manager {
 			}
 		}
 		
+		public function launchMainMusic():void
+		{
+			var c:Class;
+			c = MainSoundtrack;
+			var snd:Sound = new c();
+			soundtrackSoundChannel = snd.play(0, 500, new SoundTransform(0.5));
+		}
+		
+		public function set mainVolume(volume:Number):void
+		{
+			if (soundtrackSoundChannel) 
+			{
+				soundtrackSoundChannel.soundTransform = new SoundTransform(volume);
+			}
+		}
+		
+		public function get mainVolume():Number
+		{
+			if (soundtrackSoundChannel) 
+			{
+				return soundtrackSoundChannel.soundTransform.volume;
+			} else {
+				return 0;
+			}
+		}
+		
 		public function boomBoom():void
 		{
 			var c:Class;

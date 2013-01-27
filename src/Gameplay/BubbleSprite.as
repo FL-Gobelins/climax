@@ -5,6 +5,7 @@ package Gameplay
 	import Data.Node;
 	import Data.Tree;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
@@ -40,11 +41,19 @@ package Gameplay
 			currentBubble = bubble;
 			currentBubble.addEventListener(MouseEvent.CLICK, bubbleClicked);
 			addChild(bubble);
+			
+			if (stage) init();
+			else addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		//-----------------------------------------------------
 		//Methods
 		//-----------------------------------------------------
+		
+		private function init(e:Event = null):void
+		{
+			SoundManager.getInstance().launchMainMusic();
+		}
 		
 		/**
 		 * Move the given bubble to the center of the screen and handl the dependencies

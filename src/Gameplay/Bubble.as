@@ -87,8 +87,6 @@ package Gameplay
 		
 		public function displayContent():void
 		{
-			//testAnim.width = 80;
-			//testAnim.height = 80;
 			
 			contentDisplay.mask = round;
 		}

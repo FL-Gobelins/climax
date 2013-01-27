@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'26/01/2013'</value>
+      <value>'27/01/2013'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -41,6 +41,7 @@
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\lib\greensock.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\anims.swc</path-element>
       <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\nodes.swc</path-element>
+      <path-element>C:\Users\Leonard\Documents\Flash\Climax\assets\intro.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>

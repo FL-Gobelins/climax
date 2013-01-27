@@ -14,8 +14,10 @@ package Data
 		{
 			if (type == "text")
 				return new Dialog(value);
-			//else if (type == "sound")
-			//else if (type == "image")
+			else if (type == "sound")
+				return new ContentSound(value);
+			else if (type == "image")
+				return new ContentImage(value);
 			return null;
 		}
 	}

@@ -127,6 +127,10 @@ package Gameplay
 				dialog.txt_dialog.text = (content as Dialog).toString();
 				trace((content as Dialog).toString());
 			}
+			//else if (content is ContentImage)
+			//do stuff
+			//else if (content is ContentSound)
+			//do stuff
 			contentDisplay.mask = round;
 		}
 		

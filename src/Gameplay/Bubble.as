@@ -6,6 +6,7 @@ package Gameplay
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	import org.osflash.signals.Signal;
 	import com.greensock.plugins.*;
 	
@@ -126,12 +127,16 @@ package Gameplay
 		private function callbackScaleUp():void
 		{
 			displayContent();
+			openDisplay.txt_label.visible = false;
 			scaledUp.dispatch();
 		}
 		
 		private function callbackScaleDown():void
 		{
 			openDisplay.ring.visible = true;
+			openDisplay.txt_label.visible = true;
+			addChild(openDisplay.txt_label);
+			//TODO Here
 			scaledDown.dispatch();
 		}
 		

@@ -89,5 +89,19 @@ package Data
 		{
 			_visited = value;
 		}
+		
+		public function near(node:Node):Boolean
+		{	
+			if (node == this)
+				return true;
+			if (predecessor == node)
+				return true;
+			for each (var successor:Node in successors)
+				if (successor == node)
+					return true;
+					
+			return false;
+				
+		}
 	}
 }

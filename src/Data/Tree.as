@@ -10,6 +10,7 @@ package Data
 		private var start:Node = new Node();
 		private var current:Node;
 		private var loader:Loader;
+		private var path:Vector.<Node> = new Vector.<Node>;
 		
 		public function Tree(loader:Loader):void
 		{
@@ -17,7 +18,7 @@ package Data
 			start = current = loader.parent();
 			start.visited = true;
 			var printer:Printer = new Printer();
-			
+			path.push(start);
 			// Print the tree
 			//BFS(start, printer);
 			//DFS(start, printer);
@@ -62,6 +63,7 @@ package Data
 				{
 					current = node;
 					current.visited = true;
+					path.push(current);
 					return;
 				}
 			}
@@ -71,8 +73,22 @@ package Data
 		
 		public function previous():void
 		{
-			if(current.id != 0)
+			if (current.id != 0)
+			{
 				current = current.getPredecessor();
+				path.pop();
+			}
+		}
+		
+		public function isInMainPath(node:Node):Boolean
+		{
+				for each(var element:Node in path)
+				{
+					if (element == node)
+						return true;
+				}
+				
+				return false;
 		}
 	}
 }

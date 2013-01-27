@@ -10,9 +10,16 @@ package Gameplay
 	public class BubbleLink extends Sprite 
 	{
 		
-		public function BubbleLink(originX:int, originY:int, targetX:int, targetY:int) 
+		public function BubbleLink(originX:int, originY:int, targetX:int, targetY:int, blue:Boolean = false) 
 		{
-			graphics.lineStyle(3,0xf29127);
+			if (blue) 
+			{
+				graphics.lineStyle(3,0x248d9e);
+			} else 
+			{
+				graphics.lineStyle(3,0xf29127);
+			}
+			
 			graphics.lineTo(targetX - originX, targetY - originY);
 			graphics.endFill();
 			alpha = 0;

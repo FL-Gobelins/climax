@@ -52,18 +52,26 @@ package Gameplay
 			
 			var spacer:int = Global.WIDTH / (amount + 1); //spacer between two new bubbles
 			//we place a new bubble at each spacer
-			for (var l:int = 0; l < amount; l++) 
+			//for (var l:int = 0; l < amount; l++) 
+			var l:int = 1;
+			for each (var successor:Node in localScenario.getCurrent().getSuccessors())//3; // int(Math.random() * 5) + 1;//This should be equales to bubbleClicked.node.successors.length	
 			{
-				var localNode:Node = localScenario.getCurrent().getSuccessors()[l];
+				//var localNode:Node = localScenario.getCurrent().getSuccessors()[l];
 				
-				if (!localNode.visited) 
+				if (true)//!successor.visited) 
 				{
 					//Create a bubble
-					var newBubble:Bubble = new Bubble(localNode);
-					localNode.bubble = newBubble;
+					var newBubble:Bubble = new Bubble(successor);
+					if (successor.visited) 
+					{
+						newBubble.switchColor();
+					}
+					
+					
+					successor.bubble = newBubble;
 					//TODO : add a node to the bubble
 					//place the bubble
-					newBubble.x = bubble.x - (Global.WIDTH / 2) + ((l+1) * spacer);
+					newBubble.x = bubble.x - (Global.WIDTH / 2) + (l * spacer);
 					newBubble.y = bubble.y - 220;
 					//Add it to the bubble vector
 					bubbles.push(newBubble);
@@ -71,12 +79,24 @@ package Gameplay
 					addChild(newBubble);
 					
 					//create a line
-					var line:BubbleLink = new BubbleLink(currentBubble.x, currentBubble.y, newBubble.x, newBubble.y);
+					var line:BubbleLink;
+					
+					if (successor.visited) 
+					{
+						newBubble.switchColor();
+						line = new BubbleLink(currentBubble.x, currentBubble.y, newBubble.x, newBubble.y, true);
+					} else {
+						line = new BubbleLink(currentBubble.x, currentBubble.y, newBubble.x, newBubble.y);
+
+					}
+					
 					line.x = currentBubble.x;
 					line.y = currentBubble.y;
 					newBubble.oncomingLine = line;
 					addChildAt(line, 0);
 				}
+				
+				l++;
 			}
 			
 			//If we are going down, unstore top-side bubbles
@@ -131,20 +151,22 @@ package Gameplay
 		 * @param	bubble : the bubble clicked this round
 		 * @param	newBubblesAmount : amount of bubbles created. Use to not destroy the new bubbles
 		 */
-		private function cleanBubbles(bubble:Bubble, newBubblesAmount:int):void
+		private function cleanBubbles(bubble:Bubble, amount:int):void
 		{
 			//Clean everything not stored and not added in the last move (that's the -newBubblesAmount thingy)
-			for (var i:int = 0; i < (bubbles.length - newBubblesAmount); i++) 
+			//for (var i:int = 0; i < (bubbles.length - amount); i++)
+			for each(var bubble:Bubble in bubbles)
 			{
-				if (!bubbles[i].node.visited ) 
+				if (!localScenario.getCurrent().near(bubble.node) &&
+				!localScenario.isInMainPath(bubble.node))
 				{
 					//If bubble is not stored, it is either on a unused branch or geting out of the screen by the top
 					//TODO : tweenout bubble
-					TweenMax.to(bubbles[i], 0.2, { alpha:0 });//, onComplete:garbageCollectBubble, onCompleteParams:[bubble[i]] } );
+					TweenMax.to(bubble, 0.2, { alpha:0 });//, onComplete:garbageCollectBubble, onCompleteParams:[bubble[i]] } );
 					//TODO : fade out bubble.line if bubble.line
-					if (bubbles[i].oncomingLine) 
+					if (bubble.oncomingLine) 
 					{
-						TweenMax.to(bubbles[i].oncomingLine, 0.2, { alpha:0} );
+						TweenMax.to(bubble.oncomingLine, 0.2, { alpha:0} );
 					}
 				}
 			}

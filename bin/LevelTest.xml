@@ -61,7 +61,7 @@
 				Ninja
 			</title>
 			<content type="sound"> 
-				MaClassSound
+				NinjaSound
 			</content>
 </node>
 <node id="8" parent="4">
@@ -149,7 +149,7 @@
 				Childhood
 			</title>
 			<content type="sound"> 
-				MaClassSound
+				ChildhoodSound
 			</content>
 </node>
 <node id="19" parent="18">
@@ -165,7 +165,7 @@
 				Girls
 			</title>
 			<content type="sound"> 
-				MaClassSound
+				GirlsSound
 			</content>
 </node>
 <node id="21" parent="19">

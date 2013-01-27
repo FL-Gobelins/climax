@@ -16,6 +16,7 @@ package Gameplay
 	import flash.media.SoundTransform;
 	import flash.text.TextField;
 	import manager.EndingsManager;
+	import manager.SoundManager;
 	import org.osflash.signals.Signal;
 	import com.greensock.plugins.*;
 	import flash.utils.getDefinitionByName;
@@ -160,7 +161,7 @@ package Gameplay
 				}
 			}
 			
-			//HANDLE content LOLPENIS Clip //Join the lolPénis fanclub
+			//HANDLE content LOLPENIS Clip //Join the lolPénis fanclub // SIGNE Emeline la graphiste
 			if (content is ContentAnimation) 
 			{
 				if (parent) 
@@ -181,6 +182,14 @@ package Gameplay
 						clipDisplay.mouseChildren = false;
 						
 						parent.addChild(clipDisplay);
+						
+						//Add sound
+						if ((content as ContentAnimation).toString() == "jobJohn")
+						{
+							SoundManager.getInstance().animationSound(true);
+						} else {
+							SoundManager.getInstance().animationSound(false);
+						}
 					}
 				}
 			}
@@ -227,7 +236,21 @@ package Gameplay
 			//HANDLE content sound
 			if (content is ContentSound) 
 			{
+				var sm:SoundManager = SoundManager.getInstance();
 				
+				switch ((content as ContentSound).toString()) 
+				{
+					case "GirlsSoun":
+						sm.girl();
+					break;
+					case "NinjaSound":
+						sm.ninja();//lolPenis
+					break;
+					default:
+					case "ChildhoodSound":
+						sm.childhood();
+					break;
+				}
 			}
 			
 			//else if (content is ContentSound)
@@ -243,6 +266,8 @@ package Gameplay
 		public function hideContent():void
 		{
 			//trace ("hiding content");
+			SoundManager.getInstance().cutJobSound();
+			
 			if (dialog.parent) 
 			{
 				dialog.parent.removeChild(dialog);
@@ -328,7 +353,7 @@ package Gameplay
 		private function onEnterFrame(e:Event):void
 		{
 			//TODO : rotation
-			if (openDisplay.parent && !mouseCurrentlyOver) 
+			if (openDisplay.parent && mouseCurrentlyOver) 
 			{
 				openDisplay.ring.rotation += 1.5;
 			}

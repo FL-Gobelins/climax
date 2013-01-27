@@ -49,6 +49,8 @@ package manager {
 		
 		private var titleSoundChannel:SoundChannel;
 		private var soundtrackSoundChannel:SoundChannel;
+		private var jobSoundChannel:SoundChannel;
+		
 		
 		//} endregion
 		
@@ -129,6 +131,52 @@ package manager {
 		{
 			var c:Class;
 			c = BoomBoom;
+			var snd:Sound = new c();
+			var sc:SoundChannel = snd.play();
+		}
+		
+		public function animationSound(johnJob:Boolean = true):void
+		{
+			var c:Class;
+			if (johnJob) 
+			{
+				c = JohnJobSound;
+			} else {
+				c = AmiraJobSound;
+			}
+			var snd:Sound = new c();
+			jobSoundChannel = snd.play(0,9999);
+		}
+		
+		public function cutJobSound():void
+		{
+			if (jobSoundChannel) 
+			{
+				jobSoundChannel.stop();
+				jobSoundChannel = null;
+			}
+		}
+		
+		public function ninja():void
+		{
+			var c:Class;
+			c = NinjaSound;
+			var snd:Sound = new c();
+			var sc:SoundChannel = snd.play();
+		}
+		
+		public function girl():void
+		{
+			var c:Class;
+			c = GirlsSound;
+			var snd:Sound = new c();
+			var sc:SoundChannel = snd.play();
+		}
+		
+		public function childhood():void
+		{
+			var c:Class;
+			c = ChildhoodSound;
 			var snd:Sound = new c();
 			var sc:SoundChannel = snd.play();
 		}

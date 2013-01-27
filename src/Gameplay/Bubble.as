@@ -88,6 +88,7 @@ package Gameplay
 		public function displayContent():void
 		{
 			
+			
 			contentDisplay.mask = round;
 		}
 		
@@ -103,6 +104,7 @@ package Gameplay
 		public function scaleUp():void
 		{
 			openDisplay.ring.visible = false;
+			openDisplay.txt_label.visible = false;
 			TweenMax.to(openDisplay.display, 0.7, { frame:openDisplay.display.totalFrames, onComplete:callbackScaleUp } );
 			TweenMax.to(this, 0.7, { width:300, height:300 } );
 			open = true;
@@ -119,7 +121,6 @@ package Gameplay
 		private function callbackScaleUp():void
 		{
 			displayContent();
-			openDisplay.txt_label.visible = false;
 			scaledUp.dispatch();
 		}
 		

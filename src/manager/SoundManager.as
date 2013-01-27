@@ -101,7 +101,6 @@ package manager {
 		
 		public function boomBoom():void
 		{
-			trace("boom boom");
 			var c:Class;
 			c = BoomBoom;
 			var snd:Sound = new c();

@@ -87,12 +87,6 @@ package Gameplay
 		
 		public function displayContent():void
 		{
-			//TODO : test
-			var testAnim:JobJohn = new JobJohn();
-			contentDisplay.addChild(testAnim);
-			
-			testAnim.stop();
-			
 			//testAnim.width = 80;
 			//testAnim.height = 80;
 			

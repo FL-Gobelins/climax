@@ -82,6 +82,11 @@ package
 			addChild(bubbleSprite);
 			TweenMax.to(titleScreen, 3, { y:titleScreen.y + 500, onComplete:cleanTitleScreen } );
 		}
+		
+		private function cleanTitleScreen():void
+		{
+			
+		}
 	}
 	
 }

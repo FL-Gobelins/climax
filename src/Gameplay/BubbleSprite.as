@@ -10,6 +10,8 @@ package Gameplay
 	import flash.geom.Point;
 	import flash.geom.Transform;
 	import flash.sampler.NewObjectSample;
+	import manager.SoundManager;
+	import org.osflash.signals.Signal;
 	
 	/**
 	 * ...
@@ -20,12 +22,16 @@ package Gameplay
 		
 		public var bubbles:Vector.<Bubble> = new Vector.<Bubble>();
 		public var currentBubble:Bubble;
+		public var requestHeartbeat:Signal;
 		
 		private var localScenario:Tree;
+		private var firstClicked:Boolean = true;
 		
 		public function BubbleSprite(scenario:Tree) 
 		{
 			localScenario = scenario;
+			
+			requestHeartbeat = new Signal();
 			
 			var bubble:Bubble = new Bubble(scenario.getCurrent());
 			scenario.getCurrent().bubble = bubble;
@@ -185,6 +191,13 @@ package Gameplay
 			//Cleaning event listeners(clicks)
 			disablingBubbles();
 			
+			if (firstClicked) 
+			{
+				firstClicked = false;
+			} else {
+				requestHeartbeat.dispatch();
+				SoundManager.getInstance().boomBoom();
+			}
 			
 			if (!currentBubble.colorSwitched) 
 			{

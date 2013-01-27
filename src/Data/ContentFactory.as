@@ -18,6 +18,9 @@ package Data
 				return new ContentSound(value);
 			else if (type == "image")
 				return new ContentImage(value);
+			else if (type == "animation")
+				return new ContentAnimation(value);
+				
 			return null;
 		}
 	}

@@ -90,6 +90,11 @@ package Data
 			_visited = value;
 		}
 		
+		public function getContent():Content 
+		{
+			return content;
+		}
+		
 		public function near(node:Node):Boolean
 		{	
 			if (node == this)

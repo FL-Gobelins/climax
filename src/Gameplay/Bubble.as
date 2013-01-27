@@ -1,6 +1,8 @@
 package Gameplay 
 {
 	import com.greensock.TweenMax;
+	import Data.Content;
+	import Data.Dialog;
 	import Data.Node;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -57,16 +59,26 @@ package Gameplay
 			openDisplay = new OpenNode();
 			openDisplay.display.gotoAndStop(1);
 			addChild(openDisplay);
+<<<<<<< HEAD
+=======
+			openDisplay.txt_label.text = node.getTitle();
+			openDisplay.txt_dialog.visible = false;
+>>>>>>> 5271bfaf70ad6a01c1ab3827ab2bdac1a6e78d00
 			
 			closeDisplay = new CloseNode();
 			closeDisplay.gotoAndStop(1);
 			addChild(closeDisplay);
 			closeDisplay.visible = false;
+<<<<<<< HEAD
 			dialog = new DialogBox();
 			dialog.x += dialog.width / 2;
 			dialog.y += dialog.height / 2;
 			dialog.visible = false;
 			addChild(DialogBox);
+=======
+			closeDisplay.txt_label.visible = false;
+			closeDisplay.txt_dialog.visible = false;
+>>>>>>> 5271bfaf70ad6a01c1ab3827ab2bdac1a6e78d00
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -92,13 +104,20 @@ package Gameplay
 		public function displayContent():void
 		{
 			
-			
+
+			var content:Content = node.getContent();
+			if (content is Dialog)
+			{
+				openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = true;
+				openDisplay.txt_dialog.text = closeDisplay.txt_dialog.text = (content as Dialog).toString();
+			}
 			contentDisplay.mask = round;
 		}
 		
 		public function hideContent():void
 		{
-			
+			openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = false;
+			openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = false;
 		}
 		
 		//-------------------------------------------------------------------------------

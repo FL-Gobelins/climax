@@ -12,7 +12,7 @@ package Data
 	{
 		public static function build(type:String, value:String):Content
 		{
-			if (type == "dialog")
+			if (type == "text")
 				return new Dialog(value);
 			//else if (type == "sound")
 			//else if (type == "image")

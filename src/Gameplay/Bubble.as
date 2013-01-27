@@ -1,6 +1,8 @@
 package Gameplay 
 {
 	import com.greensock.TweenMax;
+	import Data.Content;
+	import Data.Dialog;
 	import Data.Node;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -57,12 +59,14 @@ package Gameplay
 			openDisplay.display.gotoAndStop(1);
 			addChild(openDisplay);
 			openDisplay.txt_label.text = node.getTitle();
+			openDisplay.txt_dialog.visible = false;
 			
 			closeDisplay = new CloseNode();
 			closeDisplay.gotoAndStop(1);
 			addChild(closeDisplay);
 			closeDisplay.visible = false;
 			closeDisplay.txt_label.visible = false;
+			closeDisplay.txt_dialog.visible = false;
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -88,13 +92,20 @@ package Gameplay
 		public function displayContent():void
 		{
 			
-			
+
+			var content:Content = node.getContent();
+			if (content is Dialog)
+			{
+				openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = true;
+				openDisplay.txt_dialog.text = closeDisplay.txt_dialog.text = (content as Dialog).toString();
+			}
 			contentDisplay.mask = round;
 		}
 		
 		public function hideContent():void
 		{
-			
+			openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = false;
+			openDisplay.txt_dialog.visible = closeDisplay.txt_dialog.visible = false;
 		}
 		
 		//-------------------------------------------------------------------------------

@@ -18,7 +18,6 @@ package Gameplay
 	{
 		public var colorSwitched:Boolean = false;
 		
-		public var stored:Boolean = false;
 		public var oncomingLine:BubbleLink;
 		
 		public var open:Boolean = false;
@@ -56,11 +55,13 @@ package Gameplay
 			openDisplay = new OpenNode();
 			openDisplay.display.gotoAndStop(1);
 			addChild(openDisplay);
+			openDisplay.txt_label.text = node.getTitle();
 			
 			closeDisplay = new CloseNode();
 			closeDisplay.gotoAndStop(1);
 			addChild(closeDisplay);
 			closeDisplay.visible = false;
+			closeDisplay.txt_label.visible = false;
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);

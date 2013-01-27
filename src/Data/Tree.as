@@ -11,12 +11,14 @@ package Data
 		private var current:Node;
 		private var loader:Loader;
 		
-		
 		public function Tree(loader:Loader):void
 		{
 			this.loader = loader;
 			start = current = loader.parent();
+			start.visited = true;
 			var printer:Printer = new Printer();
+			
+			// Print the tree
 			//BFS(start, printer);
 			//DFS(start, printer);
 		}
@@ -47,6 +49,30 @@ package Data
 		public function getCurrent():Node
 		{
 			return current;
+		}
+		
+		public function next(id:int):void
+		{
+			if (id == 0)
+				return;
+			
+			for each(var node:Node in getCurrent().getSuccessors())
+			{
+				if (node.id == id)
+				{
+					current = node;
+					current.visited = true;
+					return;
+				}
+			}
+			
+			throw new Error("Stop to hack this game!!!");
+		}
+		
+		public function previous():void
+		{
+			if(current.id != 0)
+				current = current.getPredecessor();
 		}
 	}
 }

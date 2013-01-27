@@ -1,6 +1,7 @@
 package Data
 {
 	import flash.text.engine.ContentElement;
+	import Gameplay.Bubble;
 	
 	/**
 	 * ...
@@ -13,6 +14,8 @@ package Data
 		private var title:String;
 		private var predecessor:Node;
 		private var successors:Vector.<Node> = new Vector.<Node>();
+		
+		public var bubble:Bubble;
 		
 		public function Node() 
 		{
@@ -27,6 +30,10 @@ package Data
 			return successors;
 		}
 		
+		public function getPredecessor():Node
+		{
+			return predecessor;
+		}
 		/**
 		 *
 		 * @param	successor
@@ -35,6 +42,8 @@ package Data
 		{
 			successors.push(successor);
 		}
+		
+		private var _visited:Boolean = false;
 		
 		/**
 		 * 
@@ -59,10 +68,26 @@ package Data
 			this.title = title;
 		}
 		
+		public function getTitle():String
+		{
+			return title;
+		}
+		
+		
 		public function toString():String
 		{
 			//TODO: print the content after finishing content classes 
 			return id + title + " ";// + content.toString() + " ";
+		}
+		
+		public function get visited():Boolean 
+		{
+			return _visited;
+		}
+		
+		public function set visited(value:Boolean):void 
+		{
+			_visited = value;
 		}
 	}
 }

@@ -85,7 +85,7 @@ package
 		
 		private function cleanTitleScreen():void
 		{
-			
+			removeChild(titleScreen);
 		}
 	}
 	

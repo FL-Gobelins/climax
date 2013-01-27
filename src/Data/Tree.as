@@ -68,6 +68,12 @@ package Data
 			
 			throw new Error("Stop to hack this game!!!");
 		}
+		
+		public function previous():void
+		{
+			if(current.id != 0)
+				current = current.getPredecessor();
+		}
 	}
 }
 

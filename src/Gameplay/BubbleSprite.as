@@ -171,11 +171,16 @@ package Gameplay
 				currentBubble.scaleDown();
 			}
 			
+			if ((e.currentTarget as Bubble).node == currentBubble.node.getPredecessor())
+			{
+				localScenario.previous();
+			} else {
+				localScenario.next(((e.currentTarget) as Bubble).node.id);
+			}
+			
 			bubbles.splice(bubbles.indexOf((e.currentTarget as Bubble)), 1);	//pop the new bubble it out of the bubbles Vector
 			bubbles.push(currentBubble); // Put former current bubble in bubbles
 			currentBubble = (e.currentTarget as Bubble);//make it the currentBubble
-			
-			localScenario.next(((e.currentTarget) as Bubble).node.id);
 			
 			//Togle line color
 			var ctransform:ColorTransform = new ColorTransform();
@@ -222,6 +227,11 @@ package Gameplay
 			
 			
 			//TODO add Event Listener on the previous node
+			var predecessor:Node = currentBubble.node.getPredecessor();
+			if (predecessor) 
+			{
+				predecessor.bubble.addEventListener(MouseEvent.CLICK, bubbleClicked);
+			}
 			
 		}
 	}

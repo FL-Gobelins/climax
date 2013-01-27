@@ -30,6 +30,10 @@ package Data
 			return successors;
 		}
 		
+		public function getPredecessor():Node
+		{
+			return predecessor;
+		}
 		/**
 		 *
 		 * @param	successor

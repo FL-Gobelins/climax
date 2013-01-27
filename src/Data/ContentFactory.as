@@ -20,6 +20,8 @@ package Data
 				return new ContentImage(value);
 			else if (type == "animation")
 				return new ContentAnimation(value);
+			else if (type == "action")
+				return new ContentAction(value);
 				
 			return null;
 		}

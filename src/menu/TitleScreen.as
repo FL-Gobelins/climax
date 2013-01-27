@@ -7,6 +7,8 @@ package menu
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import Gameplay.BubbleSprite;
+	import manager.SoundManager;
+	import org.osflash.signals.Signal;
 	
 	/**
 	 * ...
@@ -17,9 +19,15 @@ package menu
 		
 		private var display:IntroScreenAsset = new IntroScreenAsset();
 		private var introZoomedIn:Boolean = false;
+		private var musicLaunched:Boolean = false;
+		
+		public var requestLaunchGame:Signal = new Signal();
 		
 		public function TitleScreen() 
 		{
+			var sm:SoundManager = SoundManager.getInstance();
+			sm.launchTitleMusic();
+			
 			TweenPlugin.activate([FramePlugin]);
 			
 			TweenMax.to(display.clip, 32, { useFrames:true, frame:16, repeat:-1} );
@@ -52,6 +60,13 @@ package menu
 		
 		private function onClipEnterFrame(e:Event):void
 		{
+			if (display.clip.currentFrame >= 17 && !musicLaunched) 
+			{
+				musicLaunched = true;
+				TweenMax.to(SoundManager.getInstance(), 2, { titleVolume:0 } );
+				TweenMax.to(SoundManager.getInstance(), 2, { titleVolume:0 } );
+			}
+			
 			if (display.clip.currentFrame >=180 && !introZoomedIn) 
 			{
 				//Toggle a flag

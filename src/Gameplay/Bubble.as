@@ -34,6 +34,7 @@ package Gameplay
 		
 		private var openDisplay:OpenNode;
 		private var closeDisplay:CloseNode;
+		private var dialog:DialogBox;
 		//TODO temp
 		private var round:Sprite;
 		
@@ -56,13 +57,16 @@ package Gameplay
 			openDisplay = new OpenNode();
 			openDisplay.display.gotoAndStop(1);
 			addChild(openDisplay);
-			openDisplay.txt_label.text = node.getTitle();
 			
 			closeDisplay = new CloseNode();
 			closeDisplay.gotoAndStop(1);
 			addChild(closeDisplay);
 			closeDisplay.visible = false;
-			closeDisplay.txt_label.visible = false;
+			dialog = new DialogBox();
+			dialog.x += dialog.width / 2;
+			dialog.y += dialog.height / 2;
+			dialog.visible = false;
+			addChild(DialogBox);
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);

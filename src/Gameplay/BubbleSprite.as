@@ -25,6 +25,8 @@ package Gameplay
 		public var currentBubble:Bubble;
 		public var requestHeartbeat:Signal;
 		
+		private var count:int = 0;
+		
 		private var localScenario:Tree;
 		private var firstClicked:Boolean = true;
 		private var bg:GameplayBackground = new GameplayBackground();
@@ -32,6 +34,8 @@ package Gameplay
 		public function BubbleSprite(scenario:Tree) 
 		{
 			localScenario = scenario;
+			
+			bg.vignet.visible = false;
 			
 			addChild(bg);
 			
@@ -220,6 +224,12 @@ package Gameplay
 			} else {
 				requestHeartbeat.dispatch();
 				SoundManager.getInstance().boomBoom();
+				count++;
+				bg.vignet.visible = true;
+				bg.vignet.alpha = Math.min(count, 12) / 12;
+				TweenMax.delayedCall(0.2, function():void {
+					TweenMax.to(bg.vignet, count / 20 + 0.1, { alpha: (count/12) * 0.3 + 0.1 } );
+				});
 			}
 			
 			if (currentBubble) 

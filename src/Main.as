@@ -6,6 +6,7 @@ package
 	import flash.net.URLRequest;
 	import Gameplay.BubbleSprite;
 	import Data.*;
+	import menu.EndingScreen;
 	import menu.TitleScreen;
 	import com.greensock.TweenMax;
 	import org.osflash.signals.Signal;
@@ -97,8 +98,14 @@ package
 				sprite.graphics.beginFill(0xfffff, 0.0);
 				sprite.graphics.drawRect(0, 0, 800, 600);
 				addChild(sprite);
+				
+				//TODO : debug
+				removeChild(bubbleSprite);
+				addChild(new EndingScreen());
 			}
+			
 		}
+		
 	}
 	
 }

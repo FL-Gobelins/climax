@@ -2,6 +2,7 @@ package Gameplay
 {
 	import com.greensock.TweenMax;
 	import Data.Content;
+	import Data.ContentAction;
 	import Data.ContentAnimation;
 	import Data.ContentImage;
 	import Data.ContentSound;
@@ -14,6 +15,7 @@ package Gameplay
 	import flash.media.Sound;
 	import flash.media.SoundTransform;
 	import flash.text.TextField;
+	import manager.EndingsManager;
 	import org.osflash.signals.Signal;
 	import com.greensock.plugins.*;
 	import flash.utils.getDefinitionByName;
@@ -33,8 +35,6 @@ package Gameplay
 		
 		public var scaledUp:Signal;
 		public var scaledDown:Signal;
-		
-		public var endings:Vector.<ActionBackground> = new Vector.<ActionBackground>();
 		
 		private var mouseCurrentlyOver:Boolean = false;
 		
@@ -160,7 +160,7 @@ package Gameplay
 				}
 			}
 			
-			//HANDLE content LOLPENIS Clip
+			//HANDLE content LOLPENIS Clip //Join the lolPénis fanclub
 			if (content is ContentAnimation) 
 			{
 				if (parent) 
@@ -186,16 +186,42 @@ package Gameplay
 			}
 			
 			//HANDLE content lolPénis action
-			if (content is Content) 
+			if (content is ContentAction) 
 			{
-				var ending:ActionBackground = new ActionBackground();
-				ending.txt_label.text = content.toString();
 				if (parent) 
 				{
-					parent.addChild(ending);
+					var ending:ActionBackground = new ActionBackground();
+					ending.txt_label.text = content.toString();
+					
+					var newEnding:Boolean = true;
+					for (var i:int = 0; i < EndingsManager.endings.length; i++) 
+					{
+						if (EndingsManager.endings[i].txt_label.text == ending.txt_label.text) 
+						{
+							newEnding = false;
+						}
+					}
+					
+					if (newEnding) 
+					{
+						ending.scaleX = 0.3;
+						ending.scaleY = 0.3;
+					
+						ending.x = x - 100;
+						ending.y = y - 80;
+						
+						ending.gotoAndStop(1);
+						
+						parent.addChild(ending);
+						
+						ending.mouseChildren = false;
+						ending.mouseEnabled = false;
+						
+						EndingsManager.endings.push(ending);
+						
+						TweenMax.delayedCall(0.7, moveEndingElement, [ending]);
+					}
 				}
-				//tween it to the bottom of the screen, we will need'em later.
-				endings.push(ending);
 			}
 			
 			//HANDLE content sound
@@ -209,9 +235,14 @@ package Gameplay
 			contentDisplay.mask = round;
 		}
 		
+		private function moveEndingElement(endingElement:ActionBackground):void
+		{
+			TweenMax.to(endingElement, 0.5, { y:(600  - (endingElement.height * EndingsManager.endings.length)), x:(800 - endingElement.width) } );
+		}
+		
 		public function hideContent():void
 		{
-			trace ("hiding content");
+			//trace ("hiding content");
 			if (dialog.parent) 
 			{
 				dialog.parent.removeChild(dialog);
@@ -223,7 +254,7 @@ package Gameplay
 			}
 			if (clipDisplay.parent) 
 			{
-				trace("handling this thingy");
+				//trace("handling this thingy");
 				clipDisplay.parent.removeChild(clipDisplay);
 				var muteTransform:SoundTransform = new SoundTransform();
 				muteTransform.volume = 0;

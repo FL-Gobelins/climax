@@ -88,6 +88,7 @@ package Gameplay
 		public function displayContent():void
 		{
 			
+			
 			contentDisplay.mask = round;
 		}
 		

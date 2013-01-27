@@ -167,11 +167,17 @@ package Gameplay
 		 */
 		private function cleanBubbles(mainBubble:Bubble, amount:int):void
 		{
+			trace("------------------cleaning-------------");
 			//Clean everything not stored and not added in the last move (that's the -newBubblesAmount thingy)
 			//for (var i:int = 0; i < (bubbles.length - amount); i++)
 			for each(var bubble:Bubble in bubbles)
 			{
 				//if(!localScenario.isInMainPath(bubble.node))
+				var bool1:Boolean = localScenario.getCurrent().near(bubble.node);
+				var bool2:Boolean = localScenario.isInMainPath(bubble.node);
+				trace(bubble.node.getTitle() + " " + bool1 + " " + bool2);
+				
+				
 				if (!localScenario.getCurrent().near(bubble.node) && !localScenario.isInMainPath(bubble.node))
 				{
 					//If bubble is not stored, it is either on a unused branch or geting out of the screen by the top
@@ -182,7 +188,7 @@ package Gameplay
 					{
 						TweenMax.to(bubble.oncomingLine, 0.2, { alpha:0} );
 					}
-					bubbles.splice(bubbles.indexOf(bubble), 1);
+					//bubbles.splice(bubbles.indexOf(bubble), 1);
 					bubble.node.bubble = null;
 				}
 			}

@@ -37,6 +37,7 @@ package Gameplay
 		private var openDisplay:OpenNode;
 		private var closeDisplay:CloseNode;
 		private var dialog:DialogBox;
+		private var imageDisplay:PictoBank;
 		//TODO temp
 		private var round:Sprite;
 		
@@ -73,6 +74,7 @@ package Gameplay
 			dialog.mouseEnabled = false;
 			//addChild(dialog);
 			closeDisplay.txt_label.visible = false;
+			imageDisplay.gotoAndStop(1);
 			
 			//Add rotation
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -110,12 +112,13 @@ package Gameplay
 		
 		public function displayContent():void
 		{
-			dialog.visible = true;
+			//HANDLE TEXT
 			var content:Content = node.getContent();
 			if (content is Dialog)
 			{
 				if (parent) 
 				{
+					dialog.visible = true;
 					parent.addChild(dialog);
 					dialog.mouseEnabled = false;
 					dialog.mouseChildren = false;
@@ -127,8 +130,21 @@ package Gameplay
 				dialog.txt_dialog.text = (content as Dialog).toString();
 				trace((content as Dialog).toString());
 			}
-			//else if (content is ContentImage)
-			//do stuff
+			
+			//HANDLE ContentImage
+			if (content is ContentImage) 
+			{
+				if (parent) 
+				{
+					parent.addChild(imageDisplay);
+					imageDisplay.x = x;
+					imageDisplay.y = y;
+					
+					imageDisplay.gotoAndPlay((content as ContentImage).toString);
+				}
+			}
+			
+			
 			//else if (content is ContentSound)
 			//do stuff
 			contentDisplay.mask = round;
@@ -136,7 +152,15 @@ package Gameplay
 		
 		public function hideContent():void
 		{
-			dialog.visible = false;
+			if (dialog.parent) 
+			{
+				dialog.parent.removeChild(dialog);
+			}
+			
+			if (imageDisplay.parent) 
+			{
+				imageDisplay.parent.removeChild(imageDisplay);
+			}
 		}
 		
 		//-------------------------------------------------------------------------------

@@ -2,16 +2,21 @@ package Gameplay
 {
 	import com.greensock.TweenMax;
 	import Data.Content;
+	import Data.ContentAnimation;
 	import Data.ContentImage;
+	import Data.ContentSound;
 	import Data.Dialog;
 	import Data.Node;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.media.Sound;
+	import flash.media.SoundTransform;
 	import flash.text.TextField;
 	import org.osflash.signals.Signal;
 	import com.greensock.plugins.*;
+	import flash.utils.getDefinitionByName;
 	
 	
 	/**
@@ -28,6 +33,8 @@ package Gameplay
 		
 		public var scaledUp:Signal;
 		public var scaledDown:Signal;
+		
+		public var endings:Vector.<ActionBackground> = new Vector.<ActionBackground>();
 		
 		private var mouseCurrentlyOver:Boolean = false;
 		
@@ -154,14 +161,48 @@ package Gameplay
 			}
 			
 			//HANDLE content LOLPENIS Clip
-			if (content is Content) 
+			if (content is ContentAnimation) 
 			{
 				if (parent) 
 				{
-					
+					var s:String = (content as ContentAnimation).toString();
+					var ja:jobAmira = new jobAmira();
+					var jo:jobJohn = new jobJohn();
+					var c:Class = getDefinitionByName((content as ContentAnimation).toString()) as Class;
+					if (new c() is MovieClip) 
+					{
+						clipDisplay = new c();
+						clipDisplay.x = x;
+						clipDisplay.y = y;
+						
+						clipDisplay.soundTransform = new SoundTransform();
+						
+						clipDisplay.mouseEnabled = false;
+						clipDisplay.mouseChildren = false;
+						
+						parent.addChild(clipDisplay);
+					}
 				}
 			}
 			
+			//HANDLE content lolPénis action
+			if (content is Content) 
+			{
+				var ending:ActionBackground = new ActionBackground();
+				ending.txt_label.text = content.toString();
+				if (parent) 
+				{
+					parent.addChild(ending);
+				}
+				//tween it to the bottom of the screen, we will need'em later.
+				endings.push(ending);
+			}
+			
+			//HANDLE content sound
+			if (content is ContentSound) 
+			{
+				
+			}
 			
 			//else if (content is ContentSound)
 			//do stuff
@@ -170,6 +211,7 @@ package Gameplay
 		
 		public function hideContent():void
 		{
+			trace ("hiding content");
 			if (dialog.parent) 
 			{
 				dialog.parent.removeChild(dialog);
@@ -181,7 +223,12 @@ package Gameplay
 			}
 			if (clipDisplay.parent) 
 			{
+				trace("handling this thingy");
 				clipDisplay.parent.removeChild(clipDisplay);
+				var muteTransform:SoundTransform = new SoundTransform();
+				muteTransform.volume = 0;
+				clipDisplay.soundTransform = muteTransform;
+				clipDisplay.stop();
 			}
 			
 		}

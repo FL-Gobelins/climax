@@ -6,8 +6,10 @@ package
 	import flash.net.URLRequest;
 	import Gameplay.BubbleSprite;
 	import Data.*;
+	import manager.HeartBeatManager;
 	import menu.TitleScreen;
 	import com.greensock.TweenMax;
+	import org.osflash.signals.Signal;
 	
 	/**
 	 * ...
@@ -19,6 +21,9 @@ package
 		private var scenario:Tree;
 		private var bubbleSprite:BubbleSprite;
 		private var titleScreen:TitleScreen;
+		private var heartBeatManager:HeartBeatManager;
+		public var requestGameOver:Signal = new Signal();
+		private var beat:int = 12;
 		
 		public function Main():void 
 		{
@@ -60,15 +65,14 @@ package
 		 */
 		private function onLocalizedLoaded(e:Event):void
 		{
-			//Init XML global object
-			//Global.xml = new XML(e.target.data);
-			
 			loader = new LoaderXML(new XML(e.target.data));
 			scenario = new Tree(loader);
 			bubbleSprite = new BubbleSprite(scenario);
 			titleScreen = new TitleScreen();
+			heartBeatManager = new HeartBeatManager();
 			
 			titleScreen.requestLaunchGame.addOnce(launchGameRequested);
+			bubbleSprite.requestHeartbeat.add(manageHeartBeat);
 			
 			//Remove loading Screen
 			removeChild(loadingScreen);
@@ -86,6 +90,16 @@ package
 		private function cleanTitleScreen():void
 		{
 			removeChild(titleScreen);
+		}
+		
+		public function manageHeartBeat():void
+		{
+			beat--;
+			if (beat <= 0)
+			{
+				loadingScreen.graphics.beginFill(0xfffff, 0.0);
+				loadingScreen.graphics.drawRect(0, 0, 800, 600);
+			}
 		}
 	}
 	

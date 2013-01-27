@@ -78,7 +78,7 @@ package manager {
 			var c:Class;
 			c = TitleSoundtrack;
 			var snd:Sound = new c();
-			titleSoundChannel = snd.play(0, 500);
+			titleSoundChannel = snd.play(0, 500, new SoundTransform(0.5));
 		}
 		
 		public function set titleVolume(volume:Number):void
@@ -97,6 +97,15 @@ package manager {
 			} else {
 				return 0;
 			}
+		}
+		
+		public function boomBoom():void
+		{
+			trace("boom boom");
+			var c:Class;
+			c = BoomBoom;
+			var snd:Sound = new c();
+			var sc:SoundChannel = snd.play();
 		}
 		
 		
